@@ -1,0 +1,8 @@
+# Security posture via Cisco PSIRT OpenVuln API
+
+*Scanned {{ ansible_play_hosts_all | length }} devices at {{ now().strftime("%Y-%m-%d %H:%M:%S") }}*
+
+** Unreachable:** {{ ansible_play_hosts_all | difference(ansible_play_hosts) }}
+
+| Device | Vulnerabilities | Severity | CVSS Score |  First Fixed|
+|--------|-----------------|----------|------------|-------------|

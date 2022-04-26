@@ -1,0 +1,5 @@
+# Cisco API Credentials
+# How-To: https://community.cisco.com/t5/services-documents/accessing-the-cisco-psirt-openvuln-api-using-curl/ta-p/3652897
+#
+client_id:
+client_secret:
