@@ -37,7 +37,7 @@
     src: report.j2
     dest: report.md
 
-- name: append
+- name: append Vulnerability
   ansible.builtin.lineinfile:
     dest: report.md
     line: "|{{ inventory_hostname }}|{{ item.advisoryId }}| {{ item.sir }}|{{ item.cvssBaseScore }}|{{ item.firstFixed }}|"
@@ -46,3 +46,13 @@
   when: "adv_list['advisories'] is defined"
   changed_when: false
   no_log: true
+
+- name: append non Vulnerable
+  ansible.builtin.lineinfile:
+    dest: report.md
+    insertafter: 'Scanning\n$'
+    line: "- {{ inventory_hostname }} with Version:{{ ansible_facts.net_version }} Message: {{adv_list.errorMessage}}"
+    state: present
+    backrefs: false
+  when: "adv_list['errorCode'] is defined"
+  throttle: 1 # delay for worker to allow filesystem to catch up
