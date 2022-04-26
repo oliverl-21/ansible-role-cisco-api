@@ -49,7 +49,7 @@ Collection:
     client_id: <your client id>
     client_secret: <your client secret>
   roles:
-    - cisco-api
+    - {role: cisco-api, psirt: true}
 ```
 ## Sample Output
 
