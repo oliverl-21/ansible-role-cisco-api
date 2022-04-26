@@ -53,9 +53,12 @@ Collection:
 ```
 ## Sample Output
 
-ToDo
+![Play output](./sample/play.png)
 
 ![Sample PSIRT Report](./sample/report.md)
+
+6 Devices queried, 2 of them unreachable
+
 ## License
 
 GPL-3.0-or-later
