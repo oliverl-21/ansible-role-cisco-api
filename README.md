@@ -7,8 +7,9 @@ Ansible Role for Cisco PSIRT and Support API to query
 
 ## Current Tasks
 
-- get software version and OS-Type of a device and query Cisco OpenVuln API for known vulnerabilities.
-- Parse json response and append to a report based Jinja2 template.
+- get software version and OS-Type of a device
+- Query Cisco OpenVuln API for known vulnerabilities.
+- Parse json response and append to a report based on a Jinja2 template.
 
 ## ToDo
 
