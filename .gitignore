@@ -1,8 +1,8 @@
 .cache/
 *.cfg
-.github
 *.bin
-sample
+**/.github
+**/sample
 
 # exclude
 !.gitkeep
