@@ -18,12 +18,12 @@
 - name: template output
   ansible.builtin.template:
     src: report.j2
-    dest: report.md
+    dest: '{{ psirt_path }}/{{ psirt_report }}'
   run_once: true
 
 - name: append Vulnerability
   ansible.builtin.lineinfile:
-    dest: report.md
+    dest: '{{ psirt_path }}/{{ psirt_report }}'
     line: "|{{ inventory_hostname }}|{{ item.advisoryId }}| {{ item.sir }}|{{ item.cvssBaseScore }}|{{ item.firstFixed }}|"
     state: present
   loop: "{{ adv_list['advisories'] }}"
@@ -33,7 +33,7 @@
 
 - name: append non Vulnerable
   ansible.builtin.lineinfile:
-    dest: report.md
+    dest: '{{ psirt_path }}/{{ psirt_report }}'
     insertafter: 'Scanning\n$'
     line: "- {{ inventory_hostname }} with Version:{{ ansible_facts.net_version }} Message: {{adv_list.errorMessage}}"
     state: present

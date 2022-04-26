@@ -3,3 +3,5 @@
 #
 client_id:
 client_secret:
+psirt_path: .
+psirt_report: psirt-report.md

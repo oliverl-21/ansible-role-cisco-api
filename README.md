@@ -28,8 +28,10 @@ How-To ![link](https://community.cisco.com/t5/services-documents/accessing-the-c
 
 ## Role Variables
 
-- client_id: <your client id>
-- client_secret: <your client secret>
+- client_id: ```your client id```
+- client_secret: ```your client secret```
+- psirt_path: ```path for report export```
+- psirt_report: ```filename for the report```
 
 ## Dependencies
 
@@ -51,6 +53,8 @@ Collection:
   vars:
     client_id: <your client id>
     client_secret: <your client secret>
+    psirt_path: report
+    psirt_report: report.md
   roles:
     - {role: cisco-api, psirt: true}
 ```
