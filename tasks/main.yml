@@ -24,7 +24,7 @@
       Accept: application/json
     method: GET
     body_format: json
-    return_content: yes
+    return_content: true
   register: result
   delegate_to: localhost
 
@@ -45,3 +45,4 @@
   loop: "{{ adv_list['advisories'] }}"
   when: "adv_list['advisories'] is defined"
   changed_when: false
+  no_log: true
