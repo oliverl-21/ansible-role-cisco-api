@@ -1,4 +1,7 @@
+[![Release](https://github.com/oliverl-21/ansible-role-cisco-api/actions/workflows/release.yml/badge.svg)](https://github.com/oliverl-21/ansible-role-cisco-api/actions/workflows/release.yml)
+
 # ansible-role-cisco-api
+
 Ansible Role for Cisco PSIRT and Support API to query
 
 - OpenVuln
