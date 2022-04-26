@@ -55,7 +55,7 @@ Collection:
 
 ToDo
 
-![Sample Report](sample/report.md)
+![Sample PSIRT Report](./sample/report.md)
 ## License
 
 GPL-3.0-or-later
