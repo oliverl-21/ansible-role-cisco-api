@@ -19,6 +19,7 @@
   ansible.builtin.template:
     src: report.j2
     dest: report.md
+  run_once: true
 
 - name: append Vulnerability
   ansible.builtin.lineinfile:

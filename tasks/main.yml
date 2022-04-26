@@ -18,6 +18,7 @@
     body_format: form-urlencoded
   register: ciscoapitoken
   delegate_to: localhost
+  run_once: true
 
 - name: PSIRT
   ansible.builtin.import_tasks: psirt.yml
