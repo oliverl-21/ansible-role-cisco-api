@@ -1,7 +1,10 @@
+---
+# Gather required Data for Version, Model and os-type
 - name: Gather default facts
   cisco.ios.ios_facts:
     gather_subset: min
 
+# get oauth2 token
 - name: cisco api login
   ansible.builtin.uri:
     url: https://cloudsso.cisco.com/as/token.oauth2
@@ -16,43 +19,6 @@
   register: ciscoapitoken
   delegate_to: localhost
 
-- name: get psirt open vuln
-  ansible.builtin.uri:
-    url: https://api.cisco.com/security/advisories/{{ ansible_facts.net_iostype | lower | regex_replace("[^A-Za-z0-9]", "") }}?version={{ ansible_facts.net_version }}
-    headers:
-      Authorization: Bearer {{ ciscoapitoken.json.access_token }}
-      Accept: application/json
-    method: GET
-    body_format: json
-    return_content: true
-  register: result
-  delegate_to: localhost
-
-- name: set fact
-  ansible.builtin.set_fact:
-    adv_list: "{{ result.content }}"
-
-- name: template output
-  ansible.builtin.template:
-    src: report.j2
-    dest: report.md
-
-- name: append Vulnerability
-  ansible.builtin.lineinfile:
-    dest: report.md
-    line: "|{{ inventory_hostname }}|{{ item.advisoryId }}| {{ item.sir }}|{{ item.cvssBaseScore }}|{{ item.firstFixed }}|"
-    state: present
-  loop: "{{ adv_list['advisories'] }}"
-  when: "adv_list['advisories'] is defined"
-  changed_when: false
-  no_log: true
-
-- name: append non Vulnerable
-  ansible.builtin.lineinfile:
-    dest: report.md
-    insertafter: 'Scanning\n$'
-    line: "- {{ inventory_hostname }} with Version:{{ ansible_facts.net_version }} Message: {{adv_list.errorMessage}}"
-    state: present
-    backrefs: false
-  when: "adv_list['errorCode'] is defined"
-  throttle: 1 # delay for worker to allow filesystem to catch up
+- name: PSIRT
+  ansible.builtin.import_tasks: psirt.yml
+  when: psirt is defined and ansible_facts.net_system == 'ios'
