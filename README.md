@@ -36,6 +36,9 @@ Collection:
 
 ## Example Playbook
 
+```yaml
+# playbook.yml
+---
 - name: openvuln
   hosts: ios
   gather_facts: false
@@ -45,3 +48,15 @@ Collection:
     client_secret: <your client secret>
   roles:
     - cisco-api
+```
+## Sample Output
+
+ToDo
+
+## License
+
+GPL-3.0-or-later
+
+## Author Information
+
+oliverl-21
