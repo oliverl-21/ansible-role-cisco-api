@@ -1,0 +1,9 @@
+.cache/
+*.cfg
+.github
+*.bin
+sample/
+
+# exclude
+!.gitkeep
+!csv.py
