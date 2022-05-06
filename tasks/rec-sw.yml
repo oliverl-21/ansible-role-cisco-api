@@ -1,0 +1,74 @@
+---
+# get oauth2 token
+- name: cisco api login
+  ansible.builtin.uri:
+    url: https://cloudsso.cisco.com/as/token.oauth2
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+    method: POST
+    body:
+      grant_type: client_credentials
+      client_id: "{{ pss_client_id }}"
+      client_secret: "{{ pss_client_secret }}"
+    body_format: form-urlencoded
+  register: pssciscoapitoken
+  delegate_to: localhost
+  run_once: true
+
+- name: get pid of the device
+  ansible.utils.cli_parse:
+    command: show inventory 1
+    parser:
+      name: ansible.netcommon.pyats
+      os: ios
+      command: show inventory
+  register: pidparsed
+  when: ansible_net_iostype == "IOS"
+
+- name: get pid of ios-xe device
+  ansible.utils.cli_parse:
+    command: show inventory "Chassis"
+    parser:
+      name: ansible.netcommon.pyats
+      os: iosxe
+      command: show inventory
+  register: pidparsed
+  when: ansible_net_iostype == "IOS-XE"
+
+- name: set fact
+  ansible.builtin.set_fact:
+    pidfact: "{{ pidparsed.parsed.main.chassis | dict2items }}"
+  when: ansible_net_iostype == "IOS-XE"
+
+- name: output pid
+  ansible.builtin.debug:
+    msg: "{{ pidfact[0].key }}"
+
+# - name: output pid IOS
+#   ansible.builtin.debug:
+#     msg: "{{ pidparsed.parsed }}"
+#   when: ansible_net_iostype == "IOS"
+
+# - name: output pid IOS-XE
+#   ansible.builtin.debug:
+#     msg: '{{ pidparsed.parsed.main.chassis | json_query(pidquery) }}'
+#   when: ansible_net_iostype == "IOS-XE"
+#   vars:
+#     pidquery: "[0].[].pid"
+
+
+- name: get PSS recommended Software
+  ansible.builtin.uri:
+    url: https://api.cisco.com/software/suggestion/v2/suggestions/releases/productIds/{{ pidfact[0].key }}
+    headers:
+      Authorization: Bearer {{ pssciscoapitoken.json.access_token }}
+      Accept: application/json
+    method: GET
+    body_format: json
+    return_content: true
+  register: result
+  delegate_to: localhost
+
+- name: output
+  ansible.builtin.debug:
+    msg: "{{ result.json }}"

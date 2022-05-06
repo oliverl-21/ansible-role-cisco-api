@@ -1,4 +1,20 @@
 ---
+# get oauth2 token
+- name: cisco api login
+  ansible.builtin.uri:
+    url: https://cloudsso.cisco.com/as/token.oauth2
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+    method: POST
+    body:
+      grant_type: client_credentials
+      client_id: "{{ client_id }}"
+      client_secret: "{{ client_secret }}"
+    body_format: form-urlencoded
+  register: ciscoapitoken
+  delegate_to: localhost
+  run_once: true
+
 - name: get psirt open vuln
   ansible.builtin.uri:
     url: https://api.cisco.com/security/advisories/{{ ansible_facts.net_iostype | lower | regex_replace("[^A-Za-z0-9]", "") }}?version={{ ansible_facts.net_version }}

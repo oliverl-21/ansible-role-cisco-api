@@ -6,7 +6,7 @@ Ansible Role for Cisco PSIRT and Support API to query
 
 - OpenVuln
 - EoX - future
-- Recommended Software - future
+- Recommended Software - WiP
 
 ## Current Tasks
 
@@ -28,10 +28,12 @@ How-To ![link](https://community.cisco.com/t5/services-documents/accessing-the-c
 
 ## Role Variables
 
-- client_id: ```your client id```
+- client_id: ```your API client id```
 - client_secret: ```your client secret```
 - psirt_path: ```path for report export```
 - psirt_report: ```filename for the report```
+- pss_client_id: ```your PSS API client id```
+- pss_client_secret: ```your PSS API client secret```
 
 ## Dependencies
 
@@ -56,7 +58,7 @@ Collection:
     psirt_path: report
     psirt_report: report.md
   roles:
-    - {role: cisco-api, psirt: true}
+    - {role: cisco-api, psirt: true, recsw: true}
 ```
 ## Sample Output
 

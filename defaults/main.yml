@@ -1,7 +1,18 @@
 # Cisco API Credentials
 # How-To: https://community.cisco.com/t5/services-documents/accessing-the-cisco-psirt-openvuln-api-using-curl/ta-p/3652897
 #
+
+# Feature Flag should be set via Playbook, defines which tasks to run
+psirt: false
+recsw: false
+
+# Psirt/openvuln Parameters
 client_id:
 client_secret:
 psirt_path: .
 psirt_report: psirt-report.md
+
+
+# PSS API Credentials (EoX, Software Suggestion ...)
+pss_client_id:
+pss_client_secret:
