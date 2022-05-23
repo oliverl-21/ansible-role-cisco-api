@@ -24,9 +24,9 @@ Ansible Role for Cisco PSIRT and Support API to query
 
 ## Requirements
 
-Access to ![Cisco API Console](https://apiconsole.cisco.com/)
+Access to [Cisco API Console](https://apiconsole.cisco.com/)
 
-How-To ![link](https://community.cisco.com/t5/services-documents/accessing-the-cisco-psirt-openvuln-api-using-curl/ta-p/3652897)
+How-To [link](https://community.cisco.com/t5/services-documents/accessing-the-cisco-psirt-openvuln-api-using-curl/ta-p/3652897)
 
 ## Role Variables
 
