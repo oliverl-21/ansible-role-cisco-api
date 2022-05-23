@@ -1,0 +1,9 @@
+# Recommended Software Version Report
+
+*Scanned {{ ansible_play_hosts_all | length }} devices at {{ now().strftime("%Y-%m-%d %H:%M:%S") }}*
+
+** Unreachable:** {{ ansible_play_hosts_all | difference(ansible_play_hosts) }}
+
+## Devices not on recommended Software
+| Device Name | Current Version | rec. Version | release Date |
+|-------------|-----------------|--------------|--------------|

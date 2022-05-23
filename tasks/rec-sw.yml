@@ -15,15 +15,15 @@
   delegate_to: localhost
   run_once: true
 
-- name: get pid of the device
-  ansible.utils.cli_parse:
-    command: show inventory 1
-    parser:
-      name: ansible.netcommon.pyats
-      os: ios
-      command: show inventory
-  register: pidparsed
-  when: ansible_net_iostype == "IOS"
+# - name: get pid of the device
+#   ansible.utils.cli_parse:
+#     command: show inventory
+#     parser:
+#       name: ansible.netcommon.pyats
+#       os: ios
+#       command: show inventory
+#   register: pidparsed
+#   when: ansible_net_iostype == "IOS"
 
 - name: get pid of ios-xe device
   ansible.utils.cli_parse:
@@ -40,24 +40,7 @@
     pidfact: "{{ pidparsed.parsed.main.chassis | dict2items }}"
   when: ansible_net_iostype == "IOS-XE"
 
-- name: output pid
-  ansible.builtin.debug:
-    msg: "{{ pidfact[0].key }}"
-
-# - name: output pid IOS
-#   ansible.builtin.debug:
-#     msg: "{{ pidparsed.parsed }}"
-#   when: ansible_net_iostype == "IOS"
-
-# - name: output pid IOS-XE
-#   ansible.builtin.debug:
-#     msg: '{{ pidparsed.parsed.main.chassis | json_query(pidquery) }}'
-#   when: ansible_net_iostype == "IOS-XE"
-#   vars:
-#     pidquery: "[0].[].pid"
-
-
-- name: get PSS recommended Software
+- name: get PSS recommended Software for IOS-XE
   ansible.builtin.uri:
     url: https://api.cisco.com/software/suggestion/v2/suggestions/releases/productIds/{{ pidfact[0].key }}
     headers:
@@ -66,9 +49,29 @@
     method: GET
     body_format: json
     return_content: true
-  register: result
+  register: xeresult
   delegate_to: localhost
+  when: ansible_net_iostype == "IOS-XE"
 
 - name: output
   ansible.builtin.debug:
-    msg: "{{ result.json }}"
+    msg: "{{ xeresult.json.productList }}"
+  when: ansible_net_iostype == "IOS-XE"
+
+- name: get PSS recommended Software for IOS
+  ansible.builtin.uri:
+    url: https://api.cisco.com/software/suggestion/v2/suggestions/releases/productIds/{{ ansible_facts.net_model }}
+    headers:
+      Authorization: Bearer {{ pssciscoapitoken.json.access_token }}
+      Accept: application/json
+    method: GET
+    body_format: json
+    return_content: true
+  register: iosresult
+  delegate_to: localhost
+  when: ansible_net_iostype == "IOS"
+
+- name: output ios
+  ansible.builtin.debug:
+    msg: "{{ iosresult.json.productList }}"
+  when: ansible_net_iostype == "IOS"
