@@ -7,13 +7,15 @@ Ansible Role for Cisco PSIRT and Support API to query
 - OpenVuln
 - EoX - future
 - Recommended Software - WiP
+  - requests done
+  - ToDo: generate output
 
 ## Current Tasks
 
 - get software version and OS-Type of a device
 - Query Cisco OpenVuln API for known vulnerabilities.
 - Parse json response for vulnerabilities and append to a report based on a Jinja2 template.
-- If errorCode for nun vulnerable version is thrown by Cisco API, append to report Device, current version and errorMessage
+- If errorCode for non vulnerable version is thrown by Cisco API, append to report Device, current version and errorMessage
 
 ## ToDo
 
@@ -55,6 +57,8 @@ Collection:
   vars:
     client_id: <your client id>
     client_secret: <your client secret>
+    pss_client_id: <your PSS client id>
+    pss_client_secret: <your PSS client secret>
     psirt_path: report
     psirt_report: report.md
   roles:
