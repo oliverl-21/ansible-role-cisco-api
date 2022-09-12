@@ -2,9 +2,9 @@
 
 # ansible-role-cisco-api
 
-| | |
-|:---:| :---: |
-|[ToDo](#todo) | [Sample Report](sample/report.md) |
+| |
+|:---:|
+|[ToDo](#todo) \| [Sample Report](sample/report.md) |
 
 Ansible Role for Cisco PSIRT and Support API to query
 
