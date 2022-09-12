@@ -1,6 +1,6 @@
 ---
 # get oauth2 token
-- name: cisco api login
+- name: Cisco api login
   ansible.builtin.uri:
     url: https://cloudsso.cisco.com/as/token.oauth2
     headers:
@@ -25,7 +25,7 @@
 #   register: pidparsed
 #   when: ansible_net_iostype == "IOS"
 
-- name: get pid of ios-xe device
+- name: Get pid of ios-xe device
   ansible.utils.cli_parse:
     command: show inventory "Chassis"
     parser:
@@ -35,12 +35,12 @@
   register: pidparsed
   when: ansible_net_iostype == "IOS-XE"
 
-- name: set fact
+- name: Set fact
   ansible.builtin.set_fact:
     pidfact: "{{ pidparsed.parsed.main.chassis | dict2items }}"
   when: ansible_net_iostype == "IOS-XE"
 
-- name: get PSS recommended Software for IOS-XE
+- name: Get PSS recommended Software for IOS-XE
   ansible.builtin.uri:
     url: https://api.cisco.com/software/suggestion/v2/suggestions/releases/productIds/{{ pidfact[0].key }}
     headers:
@@ -53,12 +53,12 @@
   delegate_to: localhost
   when: ansible_net_iostype == "IOS-XE"
 
-- name: output
+- name: Output XE
   ansible.builtin.debug:
     msg: "{{ xeresult.json.productList }}"
   when: ansible_net_iostype == "IOS-XE"
 
-- name: get PSS recommended Software for IOS
+- name: Get PSS recommended Software for IOS
   ansible.builtin.uri:
     url: https://api.cisco.com/software/suggestion/v2/suggestions/releases/productIds/{{ ansible_facts.net_model }}
     headers:

@@ -51,7 +51,7 @@
   ansible.builtin.lineinfile:
     dest: '{{ psirt_path }}/{{ psirt_report }}'
     insertafter: 'Scanning\n$'
-    line: "- {{ inventory_hostname }} with Version:{{ ansible_facts.net_version }} Message: {{adv_list.errorMessage}}"
+    line: "- {{ inventory_hostname }} with Version:{{ ansible_facts.net_version }} Message: {{ adv_list.errorMessage }}"
     state: present
     backrefs: false
   when: "adv_list['errorCode'] is defined"

@@ -6,7 +6,7 @@ galaxy_info:
   company: "none"
   issue_tracker_url: https://github.com/oliverl-21/ansible-role-cisco-api/issues
   license: "GPL-3.0-or-later"
-  min_ansible_version: 2.10
+  min_ansible_version: ">=2.10"
 
   platforms:
     - name: IOS
