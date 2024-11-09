@@ -1,18 +1,19 @@
 namespace: oliverl_21
 name: cisco_api
-version: 0.0.1
+version: 0.0.2
 readme: README.md
 description: role to query Cisco API
 authors:
-    - oliverl_21
+  - oliverl_21
 repository: https://github.com/oliverl-21/ansible-role-cisco-api
 issues: https://github.com/oliverl-21/ansible-role-cisco-api/issues
 homepage: https://github.com/oliverl-21/ansible-role-cisco-api
 documentation: https://github.com/oliverl-21/ansible-role-cisco-api
 license:
-    - "GPL-3.0-or-later"
+  - "GPL-3.0-or-later"
 tags:
-    - networking
-    - cisco
-    - ios
-    - iosxe
+  - networking
+  - cisco
+  - ios
+  - iosxe
+  - api

@@ -18,4 +18,5 @@ galaxy_info:
     - cisco
     - ios
     - iosxe
+    - api
 dependencies: []
