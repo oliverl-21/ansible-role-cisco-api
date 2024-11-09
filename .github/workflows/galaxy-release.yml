@@ -9,7 +9,9 @@ name: Release
 on:
   push:
     paths:
-      - '!.github'
+      - './**'
+    paths-ignore:
+      - '.github'
 
 defaults:
   run:
