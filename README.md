@@ -1,4 +1,4 @@
-[![Release](https://github.com/oliverl-21/ansible-role-cisco-api/actions/workflows/release.yml/badge.svg)](https://github.com/oliverl-21/ansible-role-cisco-api/actions/workflows/release.yml)
+[![Release](https://github.com/oliverl-21/ansible-role-cisco-api/actions/workflows/galaxy-release.yml/badge.svg)](https://github.com/oliverl-21/ansible-role-cisco-api/actions/workflows/galaxy-release.yml)
 
 # ansible-role-cisco-api
 
